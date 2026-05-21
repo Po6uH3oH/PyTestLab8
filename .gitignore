@@ -1,6 +1,12 @@
 .idea/
+.run/
 .pytest_cache/
 .venv/
 __pycache__/
 logs/
 .env
+api/__pycache__/
+assertions/__pycache__/
+models/__pycache__/
+tests/__pycache__/
+

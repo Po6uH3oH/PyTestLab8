@@ -42,3 +42,13 @@ def assert_schema(response, model: Type[BaseModel]):
             model.model_validate(item, strict=False)
     else:
         model.model_validate(body, strict=False)
+
+def assert_error_detail(response, expected_detail):
+    data = response.json()
+    assert "detail" in data, f"Нет ключа 'detail' в ответе: {data}"
+    actual_detail = data["detail"]
+    if isinstance(actual_detail, str):
+        assert expected_detail in actual_detail, f"Ожидаемая ошибка '{expected_detail}' не найдена в '{actual_detail}'"
+    elif isinstance(actual_detail, list):
+        msg_list = [err.get("msg", "") for err in actual_detail]
+        assert any(expected_detail in msg for msg in msg_list), f"Ожидаемая ошибка '{expected_detail}' не найдена в {msg_list}"

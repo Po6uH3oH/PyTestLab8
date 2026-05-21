@@ -8,3 +8,6 @@ def get_profiles(client, limit=100, offset=0):
 
 def get_profile_by_id(client, account_id):
     return client.get(routes.Routes.PROFILES_ITEM.format(account_id))
+
+def delete_profile_by_id(client, account_id):
+    return client.delete(routes.Routes.PROFILES_ITEM.format(account_id))
